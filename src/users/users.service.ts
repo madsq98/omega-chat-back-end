@@ -19,15 +19,15 @@ export class UsersService {
     return this.userRepo.getAll();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.userRepo.getOne(id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: string, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     this.userRepo.getOne(id).then((obj) => {
       return this.userRepo.delete(obj);
     });

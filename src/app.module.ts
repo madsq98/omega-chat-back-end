@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { ChatroomsModule } from './chatrooms/chatrooms.module';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "./users/entities/user.entity";
+import { Chatroom } from "./chatrooms/entities/chatroom.entity";
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { User } from "./users/entities/user.entity";
       database: './database/omegadb.db',
       autoLoadEntities: true,
       synchronize: true,
-      entities: [User]
+      entities: [User, Chatroom]
     }),
     UsersModule,
     ChatroomsModule],

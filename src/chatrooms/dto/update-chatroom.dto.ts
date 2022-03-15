@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateChatroomDto } from './create-chatroom.dto';
+import { ApiProperty } from "@nestjs/swagger";
 
-export class UpdateChatroomDto extends PartialType(CreateChatroomDto) {}
+export class UpdateChatroomDto {
+  @ApiProperty()
+  title: string;
+}

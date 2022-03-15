@@ -8,7 +8,7 @@ export interface IUsersRepository {
 
   delete(obj: User): Promise<DeleteResult>;
 
-  getOne(id: number): Promise<User>;
+  getOne(id: string): Promise<User>;
 
   getOneByUserAndPass(username: string, password: string);
 

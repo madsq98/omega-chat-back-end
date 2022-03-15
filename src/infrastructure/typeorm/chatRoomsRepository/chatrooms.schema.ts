@@ -2,7 +2,7 @@ import { EntitySchema } from "typeorm";
 import { Chatroom } from "../../../chatrooms/entities/chatroom.entity";
 
 export const ChatroomsSchema = new EntitySchema<Chatroom>({
-  name: 'Chatrooms',
+  name: 'Chatroom',
   target: Chatroom,
   columns: {
     id: {

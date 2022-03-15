@@ -1,19 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateChatroomDto } from './dto/create-chatroom.dto';
 import { UpdateChatroomDto } from './dto/update-chatroom.dto';
+import { IRepository } from "../infrastructure/iRepository";
+import { Chatroom } from "./entities/chatroom.entity";
 
 @Injectable()
 export class ChatroomsService {
+  constructor(private readonly chatRoomRepo: IRepository<Chatroom>) {}
+
   create(createChatroomDto: CreateChatroomDto) {
-    return 'This action adds a new chatroom';
+    return this.chatRoomRepo.create({
+      title: createChatroomDto.title
+    } as Chatroom);
   }
 
   findAll() {
-    return `This action returns all chatrooms`;
+    return this.chatRoomRepo.getAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} chatroom`;
+    return this.chatRoomRepo.getOne(id);
   }
 
   update(id: number, updateChatroomDto: UpdateChatroomDto) {
@@ -21,6 +27,8 @@ export class ChatroomsService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} chatroom`;
+    this.chatRoomRepo.getOne(id).then((obj) => {
+      return this.chatRoomRepo.delete(obj)
+    });
   }
 }

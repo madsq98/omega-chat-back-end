@@ -26,7 +26,7 @@ export class UsersRepository implements IUsersRepository {
     return this.userRepo.find();
   }
 
-  getOne(id: number): Promise<User> {
+  getOne(id: string): Promise<User> {
     return this.userRepo.findOne({
       where: {
         id: id

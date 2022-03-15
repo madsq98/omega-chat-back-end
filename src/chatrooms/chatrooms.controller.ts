@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Inject } from "@nestjs/common";
 import { ChatroomsService } from './chatrooms.service';
 import { CreateChatroomDto } from './dto/create-chatroom.dto';
 import { UpdateChatroomDto } from './dto/update-chatroom.dto';
+import { UsersService } from "../users/users.service";
 
 @Controller('chatrooms')
 export class ChatroomsController {
-  constructor(private readonly chatroomsService: ChatroomsService) {}
+  constructor(
+    @Inject('ChatroomsService') private readonly chatroomsService: ChatroomsService
+  ) {}
 
   @Post()
   create(@Body() createChatroomDto: CreateChatroomDto) {

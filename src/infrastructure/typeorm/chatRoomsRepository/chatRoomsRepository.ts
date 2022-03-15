@@ -4,7 +4,7 @@ import { Chatroom } from "../../../chatrooms/entities/chatroom.entity";
 import { DeleteResult, EntityManager, Repository } from "typeorm";
 import { ChatroomsSchema } from "./chatrooms.schema";
 
-@Injectable
+@Injectable()
 export class ChatRoomsRepository implements IRepository<Chatroom> {
   private readonly chatRoomRepo: Repository<Chatroom>;
 

@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ChatroomsModule } from './chatrooms/chatrooms.module';
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { User } from "./users/entities/user.entity";
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
       type: 'sqlite',
       database: './database/omegadb.db',
       autoLoadEntities: true,
-      synchronize: true
+      synchronize: true,
+      entities: [User]
     }),
     UsersModule,
     ChatroomsModule],

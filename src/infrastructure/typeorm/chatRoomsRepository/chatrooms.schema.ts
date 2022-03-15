@@ -6,8 +6,8 @@ export const ChatroomsSchema = new EntitySchema<Chatroom>({
   target: Chatroom,
   columns: {
     id: {
-      type 'uuid',
-      generated 'uuid',
+      type: 'uuid',
+      generated: 'uuid',
       primary: true
     },
     title: {

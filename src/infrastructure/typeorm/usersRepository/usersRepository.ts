@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { IRepository } from "../../iRepository";
 import { User } from "../../../users/entities/user.entity";
-import { EntityManager, Repository } from "typeorm";
+import { DeleteResult, EntityManager, Repository } from "typeorm";
 import { UsersSchema } from "./users.schema";
 
 @Injectable()
@@ -16,10 +16,10 @@ export class UsersRepository implements IRepository<User> {
     return this.userRepo.save<User>(obj);
   }
 
-  delete(obj: User): Promise<User> {
+  delete(obj: User): Promise<DeleteResult> {
     return this.userRepo.delete({
       id: obj.id
-    })
+    });
   }
 
   getAll(): Promise<User[]> {

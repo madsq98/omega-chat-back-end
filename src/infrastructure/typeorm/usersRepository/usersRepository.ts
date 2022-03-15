@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
-import { IRepository } from "../../iRepository";
 import { User } from "../../../users/entities/user.entity";
 import { DeleteResult, EntityManager, Repository } from "typeorm";
 import { UsersSchema } from "./users.schema";
+import { IUsersRepository } from "../../iUsersRepository";
 
 @Injectable()
-export class UsersRepository implements IRepository<User> {
+export class UsersRepository implements IUsersRepository {
   private readonly userRepo: Repository<User>;
 
   constructor(private readonly em: EntityManager) {
@@ -34,9 +34,17 @@ export class UsersRepository implements IRepository<User> {
     });
   }
 
-  update(obj: User): Promise<User> {
-    this.delete(obj);
-    this.create(obj);
+  getOneByUserAndPass(username: string, password: string) {
+    return this.userRepo.findOne({
+      where: {
+        username: username,
+        password: password
+      }
+    });
   }
 
+  update(obj: User): Promise<User> {
+    this.delete(obj);
+    return this.create(obj);
+  }
 }

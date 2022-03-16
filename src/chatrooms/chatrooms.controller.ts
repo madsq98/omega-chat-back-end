@@ -27,16 +27,19 @@ export class ChatroomsController {
   }
 
   @Get()
+  @UseGuards(AuthGuard('basic'))
   async findAll() {
     return this.chatroomsService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('basic'))
   findOne(@Param('id') id: string) {
     return this.chatroomsService.findOne(+id);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('basic'))
   remove(@Param('id') id: string) {
     return this.chatroomsService.remove(+id);
   }

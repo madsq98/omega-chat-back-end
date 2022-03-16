@@ -1,4 +1,7 @@
+import { User } from "../../users/entities/user.entity";
+
 export class Chatroom {
-  id: number;
-  title: string
+  id: string;
+  title: string;
+  owner: User;
 }

@@ -8,10 +8,8 @@ import { Chatroom } from "./entities/chatroom.entity";
 export class ChatroomsService {
   constructor(private readonly chatRoomRepo: IRepository<Chatroom>) {}
 
-  create(createChatroomDto: CreateChatroomDto) {
-    return this.chatRoomRepo.create({
-      title: createChatroomDto.title
-    } as Chatroom);
+  create(createObj: Chatroom) {
+    return this.chatRoomRepo.create(createObj);
   }
 
   findAll() {

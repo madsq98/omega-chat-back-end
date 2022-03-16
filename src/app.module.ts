@@ -6,6 +6,8 @@ import { ChatroomsModule } from './chatrooms/chatrooms.module';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "./users/entities/user.entity";
 import { Chatroom } from "./chatrooms/entities/chatroom.entity";
+import { ConfigModule } from "@nestjs/config";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
@@ -17,7 +19,9 @@ import { Chatroom } from "./chatrooms/entities/chatroom.entity";
       entities: [User, Chatroom]
     }),
     UsersModule,
-    ChatroomsModule],
+    ChatroomsModule,
+  ConfigModule.forRoot(),
+  AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

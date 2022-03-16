@@ -1,5 +1,6 @@
 import { EntitySchema } from "typeorm";
 import { Chatroom } from "../../../chatrooms/entities/chatroom.entity";
+import { User } from "../../../users/entities/user.entity";
 
 export const ChatroomsSchema = new EntitySchema<Chatroom>({
   name: 'Chatroom',
@@ -13,7 +14,17 @@ export const ChatroomsSchema = new EntitySchema<Chatroom>({
     title: {
       type: 'varchar',
       unique: true
-    }
+    },
   },
-  relations: {}
+  relations: {
+    owner: {
+      type: "one-to-one",
+      target: 'User',
+      eager: true,
+      joinColumn: {
+        referencedColumnName: 'id'
+      }
+    }
+
+  }
 });

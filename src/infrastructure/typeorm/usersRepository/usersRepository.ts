@@ -34,7 +34,7 @@ export class UsersRepository implements IUsersRepository {
     });
   }
 
-  getOneByUserAndPass(username: string, password: string) {
+  getOneByUserAndPass(username: string, password: string): Promise<User> {
     return this.userRepo.findOne({
       where: {
         username: username,

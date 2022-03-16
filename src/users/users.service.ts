@@ -1,11 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { IUsersRepository } from '../infrastructure/iUsersRepository';
-import { User } from './entities/user.entity';
+import { Injectable, Scope } from "@nestjs/common";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { IUsersRepository } from "../infrastructure/iUsersRepository";
+import { User } from "./entities/user.entity";
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST })
 export class UsersService {
+  private currentUser: User | undefined;
+
   constructor(private readonly userRepo: IUsersRepository) {}
 
   create(createUserDto: CreateUserDto) {
@@ -31,5 +33,14 @@ export class UsersService {
     this.userRepo.getOne(id).then((obj) => {
       return this.userRepo.delete(obj);
     });
+  }
+
+  async login(username: string, password: string): Promise<User> {
+    this.currentUser = await this.userRepo.getOneByUserAndPass(username, password);
+    return this.currentUser;
+  }
+
+  getCurrentUser(): User {
+    return this.currentUser;
   }
 }

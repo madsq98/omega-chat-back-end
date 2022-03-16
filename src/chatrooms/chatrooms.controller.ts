@@ -1,22 +1,33 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Inject } from "@nestjs/common";
+import { Controller, Get, Post, Body, Patch, Param, Delete, Inject, UseGuards, Request, SetMetadata } from "@nestjs/common";
 import { ChatroomsService } from './chatrooms.service';
 import { CreateChatroomDto } from './dto/create-chatroom.dto';
 import { UpdateChatroomDto } from './dto/update-chatroom.dto';
 import { UsersService } from "../users/users.service";
+import { AuthGuard } from "@nestjs/passport";
+import { Chatroom } from "./entities/chatroom.entity";
+import { OutChatroomDto } from "./dto/out-chatroom.dto";
 
 @Controller('chatrooms')
 export class ChatroomsController {
   constructor(
-    @Inject('ChatroomsService') private readonly chatroomsService: ChatroomsService
+    @Inject('ChatroomsService') private readonly chatroomsService: ChatroomsService,
+    @Inject('UsersService') private readonly usersService: UsersService
   ) {}
 
   @Post()
-  create(@Body() createChatroomDto: CreateChatroomDto) {
-    return this.chatroomsService.create(createChatroomDto);
+  @UseGuards(AuthGuard('basic'))
+  create(@Request() req, @Body() createChatroomDto: CreateChatroomDto) {
+    let newObj = {
+      title: createChatroomDto.title,
+      owner: {
+        id: req.user.id
+      }
+    } as Chatroom;
+    return this.chatroomsService.create(newObj);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.chatroomsService.findAll();
   }
 

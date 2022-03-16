@@ -10,7 +10,7 @@ export interface IUsersRepository {
 
   getOne(id: string): Promise<User>;
 
-  getOneByUserAndPass(username: string, password: string);
+  getOneByUserAndPass(username: string, password: string): Promise<User>;
 
   getAll(): Promise<User[]>;
 }

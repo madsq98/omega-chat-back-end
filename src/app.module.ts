@@ -23,7 +23,6 @@ import { Chat } from "./chats/entities/chat.entity";
     UsersModule,
     ChatroomsModule,
     ChatsModule,
-  ConfigModule.forRoot(),
   AuthModule,
   ChatsModule],
   controllers: [AppController],

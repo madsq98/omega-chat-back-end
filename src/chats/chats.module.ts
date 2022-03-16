@@ -8,8 +8,8 @@ import { ChatsSchema } from "../infrastructure/typeorm/chatsRepository/chats.sch
 
 @Module({
   imports: [TypeOrmModule.forFeature([ChatsSchema])],
-  controllers: [ChatsController, ChatsService],
-  providers: [ChatsService,
+  controllers: [ChatsController],
+  providers: [
     {
       provide: 'ChatsRepository',
       useClass: ChatsRepository

@@ -36,11 +36,6 @@ export class ChatroomsController {
     return this.chatroomsService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateChatroomDto: UpdateChatroomDto) {
-    return this.chatroomsService.update(+id, updateChatroomDto);
-  }
-
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.chatroomsService.remove(+id);

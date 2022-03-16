@@ -9,6 +9,7 @@ import { Chatroom } from "./chatrooms/entities/chatroom.entity";
 import { ConfigModule } from "@nestjs/config";
 import { AuthModule } from "./auth/auth.module";
 import { ChatsModule } from './chats/chats.module';
+import { Chat } from "./chats/entities/chat.entity";
 
 @Module({
   imports: [
@@ -17,10 +18,11 @@ import { ChatsModule } from './chats/chats.module';
       database: './database/omegadb.db',
       autoLoadEntities: true,
       synchronize: true,
-      entities: [User, Chatroom]
+      entities: [User, Chatroom, Chat]
     }),
     UsersModule,
     ChatroomsModule,
+    ChatsModule,
   ConfigModule.forRoot(),
   AuthModule,
   ChatsModule],

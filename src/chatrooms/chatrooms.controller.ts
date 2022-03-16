@@ -10,8 +10,7 @@ import { OutChatroomDto } from "./dto/out-chatroom.dto";
 @Controller('chatrooms')
 export class ChatroomsController {
   constructor(
-    @Inject('ChatroomsService') private readonly chatroomsService: ChatroomsService,
-    @Inject('UsersService') private readonly usersService: UsersService
+    @Inject('ChatroomsService') private readonly chatroomsService: ChatroomsService
   ) {}
 
   @Post()

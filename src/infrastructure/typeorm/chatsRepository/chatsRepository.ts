@@ -3,9 +3,10 @@ import { IRepository } from "../../iRepository";
 import { Chat } from "../../../chats/entities/chat.entity";
 import { DeleteResult, EntityManager, Repository } from "typeorm";
 import { ChatsSchema } from "./chats.schema";
+import { IChatsRepository } from "../../iChatsRepository";
 
 @Injectable()
-export class ChatsRepository implements IRepository<Chat> {
+export class ChatsRepository implements IChatsRepository {
   private readonly chatRepo: Repository<Chat>;
 
   constructor(private readonly em: EntityManager) {
@@ -16,28 +17,15 @@ export class ChatsRepository implements IRepository<Chat> {
     return this.chatRepo.save(obj);
   }
 
-  delete(obj: Chat): Promise<DeleteResult> {
-    return this.chatRepo.delete({
-      id: obj.id
-    });
-  }
-
   getAll(): Promise<Chat[]> {
     return this.chatRepo.find();
   }
 
-  getOne(id: number): Promise<Chat> {
-    return this.chatRepo.findOne({
+  getAllFromChatRoom(id: string): Promise<Chat[]> {
+    return this.chatRepo.find({
       where: {
-        id: id
+        chatroom: id
       }
-    });
+    })
   }
-
-  update(obj: Chat): Promise<Chat> {
-    this.delete(obj);
-    return this.create(obj);
-  }
-
-
 }

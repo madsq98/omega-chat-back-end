@@ -1,26 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { UpdateChatDto } from './dto/update-chat.dto';
+import { IRepository } from "../infrastructure/iRepository";
+import { Chat } from "./entities/chat.entity";
+import { IChatsRepository } from "../infrastructure/iChatsRepository";
 
 @Injectable()
 export class ChatsService {
-  create(createChatDto: CreateChatDto) {
-    return 'This action adds a new chat';
+  constructor(private readonly chatRepo: IChatsRepository) {
+  }
+  create(obj: Chat) {
+    return this.chatRepo.create(obj);
   }
 
   findAll() {
-    return `This action returns all chats`;
+    return this.chatRepo.getAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} chat`;
-  }
-
-  update(id: number, updateChatDto: UpdateChatDto) {
-    return `This action updates a #${id} chat`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} chat`;
+  findAllInRoom(id: string) {
+    return this.chatRepo.getAllFromChatRoom(id);
   }
 }

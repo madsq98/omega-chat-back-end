@@ -8,6 +8,7 @@ import { User } from "./users/entities/user.entity";
 import { Chatroom } from "./chatrooms/entities/chatroom.entity";
 import { ConfigModule } from "@nestjs/config";
 import { AuthModule } from "./auth/auth.module";
+import { ChatsModule } from './chats/chats.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { AuthModule } from "./auth/auth.module";
     UsersModule,
     ChatroomsModule,
   ConfigModule.forRoot(),
-  AuthModule],
+  AuthModule,
+  ChatsModule],
   controllers: [AppController],
   providers: [AppService],
 })

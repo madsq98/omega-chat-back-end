@@ -13,7 +13,6 @@ export class ChatRoomsRepository implements IRepository<Chatroom> {
   }
 
   create(obj: Chatroom): Promise<Chatroom> {
-    console.log(obj);
     return this.chatRoomRepo.save<Chatroom>(obj);
   }
 
